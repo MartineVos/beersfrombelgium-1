@@ -9,13 +9,6 @@ class BeersController extends Controller
 {
     public function index() {
         $beers = Beer::all();
-
-        // 4 bieren die score hoger als 3 hebben
-        $popular_beers = Beer::where('score', '>', 3)
-                            ->orderBy('id', 'desc')
-                            ->limit(4)
-                            ->get();
-
         return view('beers.index', compact('beers', 'popular_beers'));
     }
 
