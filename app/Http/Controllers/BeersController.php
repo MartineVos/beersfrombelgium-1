@@ -61,4 +61,10 @@ class BeersController extends Controller
         // terug naar overzicht
         return redirect()->route('home');
     }
+
+    public function delete($id) {
+        $beer = Beer::find($id);
+        $beer->delete();
+        return redirect()->route('home');
+    }
 }

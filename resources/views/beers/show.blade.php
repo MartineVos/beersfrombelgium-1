@@ -6,6 +6,9 @@
   <p>
     <a href="{{ route('beers.edit', $beer->id) }}">Edit beer</a>
   </p>
+  <p>
+    <a href="{{ route('beers.delete', $beer->id) }}">Delete beer</a>
+  </p>
 
   <p>
     Alcohol: {{ $beer->alcohol }}
