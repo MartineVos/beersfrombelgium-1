@@ -2,6 +2,11 @@
 
 @section('main-content')
   <h1>{{ $beer->name }}</h1>
+
+  <p>
+    <a href="{{ route('beers.edit', $beer->id) }}">Edit beer</a>
+  </p>
+
   <p>
     Alcohol: {{ $beer->alcohol }}
   </p>

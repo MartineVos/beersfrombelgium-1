@@ -12,4 +12,11 @@
 */
 
 Route::get('/', 'BeersController@index')->name('home');
+
+Route::get('/beer/add', 'BeersController@create')->name('beers.create');
+Route::post('/beer/add', 'BeersController@store')->name('beers.store');
+
+Route::get('/beer/{id}/edit', 'BeersController@edit')->name('beers.edit');
+Route::post('/beer/{id}/edit', 'BeersController@update')->name('beers.update');
+
 Route::get('/beer/{id}', 'BeersController@show')->name('beers.show');
