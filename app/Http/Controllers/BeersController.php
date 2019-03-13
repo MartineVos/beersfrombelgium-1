@@ -27,7 +27,9 @@ class BeersController extends Controller
     public function store(Request $request) {
         $request->validate([
             'name' => 'required',
-            'alcohol' => 'required|numeric'
+            'alcohol' => 'required|numeric',
+            'type' => 'filled',
+            'brewery' => 'filled'
         ]);
 
         // formulier data saven in databank
@@ -35,6 +37,8 @@ class BeersController extends Controller
         $beer->name = $request->name;
         $beer->alcohol = $request->alcohol;
         $beer->score = 3;
+        $beer->type_id = $request->type;
+        $beer->brewery_id = $request->brewery;
         $beer->save();
         // terug naar overzicht
         return redirect()->route('home');
@@ -49,13 +53,19 @@ class BeersController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'alcohol' => 'required|numeric'
+            'alcohol' => 'required|numeric',
+            'type' => 'filled',
+            'brewery' => 'filled',
         ]);
+
+
 
         // formulier data saven in databank
         $beer = Beer::find($id);
         $beer->name = $request->name;
         $beer->alcohol = $request->alcohol;
+        $beer->type_id = $request->type;
+        $beer->brewery_id = $request->brewery;
         // $beer->score = 3;
         $beer->save();
         // terug naar overzicht

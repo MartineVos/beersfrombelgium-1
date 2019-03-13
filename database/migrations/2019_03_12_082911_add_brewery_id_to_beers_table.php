@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class MakeBreweryDescriptionNullable extends Migration
+class AddBreweryIdToBeersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class MakeBreweryDescriptionNullable extends Migration
      */
     public function up()
     {
-        Schema::table('breweries', function (Blueprint $table) {
-            $table->text('description')->nullable()->change();
+        Schema::table('beers', function (Blueprint $table) {
+            $table->integer('brewery_id')->unsigned()->nullable();
         });
     }
 
@@ -25,8 +25,8 @@ class MakeBreweryDescriptionNullable extends Migration
      */
     public function down()
     {
-        Schema::table('breweries', function (Blueprint $table) {
-            //
+        Schema::table('beers', function (Blueprint $table) {
+            $table->dropColumn('brewery_id');
         });
     }
 }

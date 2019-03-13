@@ -13,4 +13,16 @@
   <p>
     {{ $brewery->description }}
   </p>
+
+  <hr>
+  <h3>Beers brewed here:</h3>
+  <ul>
+    @foreach($brewery->beers as $beer) 
+      <li>
+        <a href="{{ route('beers.show', $beer->id) }}">
+          {{ $beer->name }}
+        </a>
+      </li>
+    @endforeach
+  </ul>
 @endsection

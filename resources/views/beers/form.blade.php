@@ -19,3 +19,31 @@
     </span>
   @endif
 </p>
+<p>
+  <label for="type">Type:</label>
+  <select name="type" id="type">
+    <option value="">Please choose...</option>
+    @foreach(App\Type::all() as $type)
+      <option
+          {{ $beer->type_id==$type->id ? 'selected':'' }}
+          value="{{ $type->id }}"
+      >
+        {{ $type->name }}
+      </option>
+    @endforeach
+  </select>
+</p>
+<p>
+  <label for="brewery">Brewery:</label>
+  <select name="brewery" id="brewery">
+    <option value="">Please choose...</option>
+    @foreach(App\Brewery::all() as $brewery)
+      <option
+          {{ $beer->brewery_id==$brewery->id ? 'selected':'' }} 
+          value="{{ $brewery->id }}"
+      >
+        {{ $brewery->name }}
+      </option>
+    @endforeach
+  </select>
+</p>

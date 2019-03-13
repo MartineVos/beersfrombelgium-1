@@ -16,6 +16,19 @@
   <p>
     Score: {!! str_repeat('&bigstar;', $beer->score) !!}
   </p>
+  @if ($beer->type)
+  <p>
+    Type: {{ $beer->type->name }}
+  </p>
+  @endif 
+  @if ($beer->brewery)
+  <p>
+    Brewery: 
+      <a href="{{ route('breweries.show', $beer->brewery->id) }}">
+        {{ $beer->brewery->name }}
+      </a>
+  </p>
+  @endif
 @endsection
 
 @section('sidebar')
