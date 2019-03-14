@@ -34,13 +34,28 @@
 @section('sidebar')
   <section>
     <h1>Reviews</h1>
-    <article>
-      <cite>Dorien</cite> : 
-      Dit drink ik niet zo graag.
-    </article>
-    <article>
-      <cite>Martine</cite> : 
-      De smaak is maar een beetje bitter!
-    </article>
+
+    @if(Auth::check())
+      <form action="{{ route('beers.addcomment', $beer->id) }}" method="POST">
+        {{ csrf_field() }}
+        <label for="review">Add review</label> <br>
+        <textarea name="review" id="review" cols="30" rows="10"></textarea> <br>
+        <input type="submit" value="Save review">
+      </form>
+    @endif
+
+    <hr>
+    
+    @if($beer->reviews()->count())
+      @foreach($beer->reviews as $review)
+        <article>
+          <cite>{{ $review->user->name }}</cite> : 
+          {{ $review->text }}
+        </article>
+      @endforeach
+    @else 
+      <p>No reviews yet</p>
+    @endif
+    
   </section>
 @endsection

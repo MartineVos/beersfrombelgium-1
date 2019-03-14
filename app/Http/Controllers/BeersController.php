@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Beer;
+use App\Review;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BeersController extends Controller
 {
@@ -39,6 +41,7 @@ class BeersController extends Controller
         $beer->score = 3;
         $beer->type_id = $request->type;
         $beer->brewery_id = $request->brewery;
+        $beer->tastes()->sync($request->tastes);
         $beer->save();
         // terug naar overzicht
         return redirect()->route('home');
@@ -57,9 +60,6 @@ class BeersController extends Controller
             'type' => 'filled',
             'brewery' => 'filled',
         ]);
-
-
-
         // formulier data saven in databank
         $beer = Beer::find($id);
         $beer->name = $request->name;
@@ -67,6 +67,7 @@ class BeersController extends Controller
         $beer->type_id = $request->type;
         $beer->brewery_id = $request->brewery;
         // $beer->score = 3;
+        $beer->tastes()->sync($request->tastes);
         $beer->save();
         // terug naar overzicht
         return redirect()->route('home');
@@ -76,5 +77,17 @@ class BeersController extends Controller
         $beer = Beer::find($id);
         $beer->delete();
         return redirect()->route('home');
+    }
+
+    public function add_comment($id, Request $request) {
+        // validate.....
+
+        $review = new Review;
+        $review->beer_id = $id;
+        $review->user_id = Auth::id();
+        $review->text = $request->review;
+        $review->save();
+
+        return redirect()->route('beers.show', $id);
     }
 }

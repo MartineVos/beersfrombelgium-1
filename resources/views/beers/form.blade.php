@@ -47,3 +47,14 @@
     @endforeach
   </select>
 </p>
+<p>
+  Tastes: <br>
+  @foreach(App\Taste::all() as $taste)
+    <label>
+      <input type="checkbox" name="tastes[]" value="{{ $taste->id }}"
+        {{ $beer->tastes->contains('id', $taste->id) ? 'checked':'' }}
+      > 
+      {{ $taste->name }} <br>
+    </label>
+  @endforeach
+</p>

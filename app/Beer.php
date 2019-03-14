@@ -20,6 +20,10 @@ class Beer extends Model
     }
 
     public function tastes() {
-        return $this->hasMany('App\Taste');
+        return $this->belongsToMany('App\Taste');
+    }
+
+    public function reviews() {
+        return $this->hasMany('App\Review');
     }
 }
